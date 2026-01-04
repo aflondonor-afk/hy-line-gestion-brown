@@ -128,6 +128,19 @@ const App: React.FC = () => {
   const [currentWeek, setCurrentWeek] = useState<number>(0);
   const allWeeks = useMemo(() => generateWeekData(), []);
 
+  // Preload images for instant transitions
+  React.useEffect(() => {
+    const imagesToPreload = [
+      'Sem 1.png', 'Sem 2.png', 'Sem 3.png',
+      'Sem 4.png', 'Sem 5.png', 'Sem 6.png',
+      './pellets.png'
+    ];
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   const currentData = allWeeks.find(w => w.week === currentWeek) || allWeeks[0];
 
   return (
