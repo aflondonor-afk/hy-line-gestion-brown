@@ -19,8 +19,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     const chickImage = getChickImage(data.week);
 
     const weightStats = [
-        { label: 'Peso H', value: data.weightH, unit: 'g', icon: 'inventory_2', color: 'text-blue-600', bg: 'bg-blue-50/50' },
-        { label: 'Peso M', value: data.weightM, unit: 'g', icon: 'scale', color: 'text-emerald-600', bg: 'bg-emerald-50/50' },
+        { label: 'Peso H', value: data.weightH, unit: 'g', icon: 'female', color: 'text-blue-600', bg: 'bg-blue-50/50' },
+        { label: 'Peso M', value: data.weightM, unit: 'g', icon: 'male', color: 'text-emerald-600', bg: 'bg-emerald-50/50' },
     ];
 
     const consumptionStats = [
