@@ -57,6 +57,11 @@ const realConsumption: Record<number, { h: number, m: number }> = {
   21: { h: 104, m: 106 }
 };
 
+const realWaterConsumption: Record<number, number> = {
+  1: 19, 2: 30, 3: 40, 4: 46, 5: 52, 6: 58, 7: 64, 8: 72, 9: 80, 10: 88,
+  11: 96, 12: 104, 13: 110, 14: 117, 15: 120, 16: 122, 17: 126, 18: 130
+};
+
 const generateWeekData = (): WeekData[] => {
   const data: WeekData[] = [];
   for (let i = 0; i <= 75; i++) {
@@ -82,10 +87,14 @@ const generateWeekData = (): WeekData[] => {
     let water, feed;
     if (realConsumption[i]) {
       feed = realConsumption[i].h; // Using female consumption as primary for feed
-      water = realConsumption[i].m * 1.8; // Simple water estimation
+    } else {
+      feed = i > 18 ? 112 + (Math.random() * 5) : 10 + (i * 5);
+    }
+
+    if (realWaterConsumption[i]) {
+      water = realWaterConsumption[i];
     } else {
       water = i * 15 + (Math.random() * 10);
-      feed = i > 18 ? 112 + (Math.random() * 5) : 10 + (i * 5);
     }
 
     data.push({

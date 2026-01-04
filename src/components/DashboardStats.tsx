@@ -27,7 +27,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
         },
         {
             label: 'CONS. AGUA',
-            value: data.waterConsumption.toFixed(1),
+            value: `≈ ${data.waterConsumption.toFixed(0)}`,
             unit: 'ml',
             icon: 'water_drop',
             iconBg: 'bg-cyan-50',
