@@ -44,33 +44,35 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     ];
 
     return (
-        <div className="flex flex-col md:flex-row gap-6 items-center md:items-stretch">
-            {/* Chick Image - Left Column */}
-            <div className="w-full md:w-1/2 bg-white rounded-[32px] p-4 shadow-soft border border-gray-50 flex items-center justify-center overflow-hidden min-h-[300px]">
-                <img
-                    src={data.week <= 2 ? "sem1-2.jpg" : "sem1-2.jpg"} // Relative path for GitHub Pages
-                    alt="Pollito"
-                    className="w-full h-auto object-contain transform scale-110 hover:scale-125 transition-transform duration-500"
-                />
-            </div>
-
-            {/* Metrics Grid - Right Column */}
-            <div className="w-full md:w-1/2 grid grid-cols-2 gap-3">
+        <div className="flex gap-4 items-stretch min-h-[380px]">
+            {/* Metrics Column - Left */}
+            <div className="flex flex-col gap-2.5 w-[110px] flex-shrink-0">
                 {stats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-4 rounded-[28px] shadow-soft border border-gray-50 flex flex-col justify-between hover:scale-105 transition-transform">
-                        <div className={`${stat.iconBg} ${stat.iconColor} w-10 h-10 rounded-xl flex items-center justify-center mb-3`}>
-                            <span className="material-icons-round text-xl">{stat.icon}</span>
+                    <div key={idx} className="bg-white p-3 rounded-[24px] shadow-soft border border-gray-50 flex flex-col justify-center flex-1 hover:scale-105 transition-transform">
+                        <div className={`${stat.iconBg} ${stat.iconColor} w-7 h-7 rounded-lg flex items-center justify-center mb-1.5`}>
+                            <span className="material-icons-round text-base">{stat.icon}</span>
                         </div>
-
                         <div>
-                            <p className="text-[9px] font-black text-gray-400 tracking-tighter mb-0.5 uppercase leading-none">{stat.label}</p>
+                            <p className="text-[7.5px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
                             <div className="flex items-baseline gap-0.5">
-                                <p className="text-xl font-black text-gray-800">{stat.value}</p>
-                                <p className="text-[10px] font-bold text-gray-300">{stat.unit}</p>
+                                <p className="text-sm font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[8px] font-bold text-gray-300">{stat.unit}</p>
                             </div>
                         </div>
                     </div>
                 ))}
+            </div>
+
+            {/* Chick Image - Right Column */}
+            <div className="flex-1 bg-white rounded-[32px] p-6 shadow-soft border border-gray-50 flex items-center justify-center overflow-hidden relative group">
+                <img
+                    src="semana 1-2.png" // Updated to the new high-quality image
+                    alt="Pollito"
+                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
+                />
+
+                {/* Visual Accent */}
+                <div className="absolute top-4 right-4 w-12 h-12 bg-secondary/10 rounded-full blur-2xl"></div>
             </div>
         </div>
     );
