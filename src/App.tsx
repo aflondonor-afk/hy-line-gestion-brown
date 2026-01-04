@@ -9,7 +9,7 @@ import { WeekData, FocusItem } from './types';
 // --- MOCK DATA GENERATORS ---
 const generateWeekData = (): WeekData[] => {
   const data: WeekData[] = [];
-  for (let i = 1; i <= 75; i++) {
+  for (let i = 0; i <= 75; i++) {
     let phase: 'Cría' | 'Levante' | 'Producción' = 'Cría';
     let targetWeight = 0;
 
@@ -49,7 +49,7 @@ const mockFocusItems: FocusItem[] = [
 ];
 
 const App: React.FC = () => {
-  const [currentWeek, setCurrentWeek] = useState<number>(25);
+  const [currentWeek, setCurrentWeek] = useState<number>(0);
   const allWeeks = useMemo(() => generateWeekData(), []);
 
   const currentData = allWeeks.find(w => w.week === currentWeek) || allWeeks[0];

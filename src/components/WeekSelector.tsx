@@ -7,7 +7,7 @@ interface WeekSelectorProps {
 }
 
 const WeekSelector: React.FC<WeekSelectorProps> = ({ currentWeek, onChange, phase }) => {
-    const weeks = Array.from({ length: 75 }, (_, i) => i + 1);
+    const weeks = Array.from({ length: 76 }, (_, i) => i);
 
     return (
         <div className="bg-white rounded-[28px] p-4 shadow-soft border border-gray-50 mb-6 max-w-sm mx-auto">
