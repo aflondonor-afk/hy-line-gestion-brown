@@ -30,12 +30,12 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     ];
 
     return (
-        <div className="flex gap-1.5 items-stretch min-h-[340px]">
+        <div className="flex gap-1.5 items-start justify-center min-h-[300px]">
             {/* Weights Column - Left */}
             <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
                 {weightStats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-2 rounded-xl shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
-                        <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded-md flex items-center justify-center mb-1`}>
+                    <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
+                        <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded flex items-center justify-center mb-1`}>
                             <span className="material-icons-round text-[12px]">{stat.icon}</span>
                         </div>
                         <div>
@@ -47,19 +47,18 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                         </div>
                     </div>
                 ))}
-                <div className="flex-[0.5]"></div>
             </div>
 
             {/* Chick Image - Center */}
-            <div className="flex-1 flex items-center justify-center relative group">
+            <div className="flex-1 self-center flex items-center justify-center relative group max-h-[300px]">
                 {chickImage ? (
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform scale-110 transition-transform duration-700 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
+                        className="w-full h-full object-contain transform scale-125 transition-transform duration-700 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
                     />
                 ) : (
-                    <div className="flex-1 bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
+                    <div className="w-full aspect-square bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
                         <span className="material-icons-round text-5xl mb-2">add_a_photo</span>
                         <p className="text-xs font-bold uppercase tracking-widest">Sin foto</p>
                     </div>
@@ -70,8 +69,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             {/* Consumptions Column - Right */}
             <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
                 {consumptionStats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-2 rounded-xl shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
-                        <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded-md flex items-center justify-center mb-1`}>
+                    <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
+                        <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded flex items-center justify-center mb-1`}>
                             <span className="material-icons-round text-[12px]">{stat.icon}</span>
                         </div>
                         <div>
