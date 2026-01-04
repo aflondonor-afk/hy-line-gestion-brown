@@ -30,34 +30,33 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     ];
 
     return (
-        <div className="flex gap-2 items-stretch min-h-[380px]">
+        <div className="flex gap-1.5 items-stretch min-h-[340px]">
             {/* Weights Column - Left */}
-            <div className="flex flex-col gap-2.5 w-[82px] flex-shrink-0">
+            <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
                 {weightStats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-2.5 rounded-[22px] shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
-                        <div className={`${stat.bg} ${stat.color} w-6 h-6 rounded-lg flex items-center justify-center mb-1.5`}>
-                            <span className="material-icons-round text-[14px]">{stat.icon}</span>
+                    <div key={idx} className="bg-white p-2 rounded-xl shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
+                        <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded-md flex items-center justify-center mb-1`}>
+                            <span className="material-icons-round text-[12px]">{stat.icon}</span>
                         </div>
                         <div>
-                            <p className="text-[6.5px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <p className="text-[6px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
                             <div className="flex items-baseline gap-0.5">
-                                <p className="text-xs font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[11px] font-black text-gray-800">{stat.value}</p>
                                 <p className="text-[7px] font-bold text-gray-300">{stat.unit}</p>
                             </div>
                         </div>
                     </div>
                 ))}
-                {/* Spacer to balance the 2 vs 3 cards */}
                 <div className="flex-[0.5]"></div>
             </div>
 
             {/* Chick Image - Center */}
-            <div className="flex-1 flex items-center justify-center overflow-hidden relative group">
+            <div className="flex-1 flex items-center justify-center relative group">
                 {chickImage ? (
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform scale-125 transition-transform duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.12)]"
+                        className="w-full h-full object-contain transform scale-110 transition-transform duration-700 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
                     />
                 ) : (
                     <div className="flex-1 bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
@@ -69,16 +68,16 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             </div>
 
             {/* Consumptions Column - Right */}
-            <div className="flex flex-col gap-2.5 w-[82px] flex-shrink-0">
+            <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
                 {consumptionStats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-2.5 rounded-[22px] shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
-                        <div className={`${stat.bg} ${stat.color} w-6 h-6 rounded-lg flex items-center justify-center mb-1.5`}>
-                            <span className="material-icons-round text-[14px]">{stat.icon}</span>
+                    <div key={idx} className="bg-white p-2 rounded-xl shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
+                        <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded-md flex items-center justify-center mb-1`}>
+                            <span className="material-icons-round text-[12px]">{stat.icon}</span>
                         </div>
                         <div>
-                            <p className="text-[6.5px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <p className="text-[6px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
                             <div className="flex items-baseline gap-0.5">
-                                <p className="text-xs font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[11px] font-black text-gray-800">{stat.value}</p>
                                 <p className="text-[7px] font-bold text-gray-300">{stat.unit}</p>
                             </div>
                         </div>
