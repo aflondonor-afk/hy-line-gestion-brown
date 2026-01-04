@@ -75,24 +75,24 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                 ))}
             </div>
 
-            {/* Chick Image - Right Column */}
-            <div className="flex-1 bg-white rounded-[32px] p-6 shadow-soft border border-gray-50 flex items-center justify-center overflow-hidden relative group">
+            {/* Chick Image - Right Column (No container, floating effect) */}
+            <div className="flex-1 flex items-center justify-center overflow-hidden relative group">
                 {chickImage ? (
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-700 drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)]"
                     />
                 ) : (
-                    <div className="flex flex-col items-center justify-center text-gray-300 text-center p-4">
+                    <div className="flex-1 bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
                         <span className="material-icons-round text-5xl mb-2">add_a_photo</span>
                         <p className="text-xs font-bold uppercase tracking-widest">Sin foto</p>
                         <p className="text-[10px] mt-1 opacity-60">Semanas 7+</p>
                     </div>
                 )}
 
-                {/* Visual Accent */}
-                {chickImage && <div className="absolute top-4 right-4 w-12 h-12 bg-secondary/10 rounded-full blur-2xl"></div>}
+                {/* Visual Accent - Subtle glow behind the animal */}
+                {chickImage && <div className="absolute inset-0 bg-gradient-to-tr from-secondary/5 to-transparent rounded-full blur-3xl -z-10"></div>}
             </div>
         </div>
     );
