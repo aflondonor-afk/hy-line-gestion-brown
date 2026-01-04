@@ -48,7 +48,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             {/* Chick Image - Left Column */}
             <div className="w-full md:w-1/2 bg-white rounded-[32px] p-4 shadow-soft border border-gray-50 flex items-center justify-center overflow-hidden min-h-[300px]">
                 <img
-                    src={data.week <= 2 ? "/sem1-2.jpg" : "/sem1-2.jpg"} // Placeholder for other weeks if needed
+                    src={data.week <= 2 ? "sem1-2.jpg" : "sem1-2.jpg"} // Relative path for GitHub Pages
                     alt="Pollito"
                     className="w-full h-auto object-contain transform scale-110 hover:scale-125 transition-transform duration-500"
                 />
