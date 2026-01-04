@@ -19,15 +19,22 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     const chickImage = getChickImage(data.week);
 
     const weightStats = [
-        { label: 'PESO CORP. H', value: data.weightH, unit: 'g', icon: 'inventory_2', color: 'text-blue-600', bg: 'bg-blue-50/50' },
-        { label: 'PESO CORP. M', value: data.weightM, unit: 'g', icon: 'scale', color: 'text-emerald-600', bg: 'bg-emerald-50/50' },
+        { label: 'Peso H', value: data.weightH, unit: 'g', icon: 'inventory_2', color: 'text-blue-600', bg: 'bg-blue-50/50' },
+        { label: 'Peso M', value: data.weightM, unit: 'g', icon: 'scale', color: 'text-emerald-600', bg: 'bg-emerald-50/50' },
     ];
 
     const consumptionStats = [
-        { label: 'CONS. ALIM. H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: 'restaurant', color: 'text-orange-600', bg: 'bg-orange-50/50' },
-        { label: 'CONS. ALIM. M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: 'restaurant', color: 'text-rose-600', bg: 'bg-rose-50/50' },
-        { label: 'CONS. AGUA', value: `≈ ${data.waterConsumption.toFixed(0)}`, unit: 'ml', icon: 'water_drop', color: 'text-cyan-600', bg: 'bg-cyan-50/50' },
+        { label: 'Consumo H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: 'feed-bag.png', isImage: true, color: 'text-orange-600', bg: 'bg-orange-50/50' },
+        { label: 'Consumo M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: 'feed-bag.png', isImage: true, color: 'text-rose-600', bg: 'bg-rose-50/50' },
+        { label: 'Consumo', value: `≈ ${data.waterConsumption.toFixed(0)}`, unit: 'ml', icon: 'water_drop', color: 'text-cyan-600', bg: 'bg-cyan-50/50' },
     ];
+
+    const renderIcon = (stat: any) => {
+        if (stat.isImage) {
+            return <img src={stat.icon} alt={stat.label} className="w-full h-full object-contain p-0.5" />;
+        }
+        return <span className="material-icons-round text-[12px]">{stat.icon}</span>;
+    };
 
     return (
         <div className="flex gap-1.5 items-start justify-center min-h-[300px]">
@@ -36,13 +43,13 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                 {weightStats.map((stat, idx) => (
                     <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
                         <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded flex items-center justify-center mb-1`}>
-                            <span className="material-icons-round text-[12px]">{stat.icon}</span>
+                            {renderIcon(stat)}
                         </div>
                         <div>
-                            <p className="text-[6px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
                             <div className="flex items-baseline gap-0.5">
-                                <p className="text-[11px] font-black text-gray-800">{stat.value}</p>
-                                <p className="text-[7px] font-bold text-gray-300">{stat.unit}</p>
+                                <p className="text-[14px] font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[10px] font-bold text-gray-300">{stat.unit}</p>
                             </div>
                         </div>
                     </div>
@@ -55,7 +62,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform scale-125 transition-transform duration-700 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
+                        className="w-full h-full object-contain transform scale-110 transition-transform duration-100 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
                     />
                 ) : (
                     <div className="w-full aspect-square bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
@@ -71,13 +78,13 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                 {consumptionStats.map((stat, idx) => (
                     <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
                         <div className={`${stat.bg} ${stat.color} w-5 h-5 rounded flex items-center justify-center mb-1`}>
-                            <span className="material-icons-round text-[12px]">{stat.icon}</span>
+                            {renderIcon(stat)}
                         </div>
                         <div>
-                            <p className="text-[6px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
                             <div className="flex items-baseline gap-0.5">
-                                <p className="text-[11px] font-black text-gray-800">{stat.value}</p>
-                                <p className="text-[7px] font-bold text-gray-300">{stat.unit}</p>
+                                <p className="text-[14px] font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[10px] font-bold text-gray-300">{stat.unit}</p>
                             </div>
                         </div>
                     </div>
