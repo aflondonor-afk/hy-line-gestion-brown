@@ -24,8 +24,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     ];
 
     const consumptionStats = [
-        { label: 'Consumo H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: '/hy-line-gestion-brown/feed-bag.png', isImage: true, color: 'text-orange-600', bg: 'bg-orange-50/50' },
-        { label: 'Consumo M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: '/hy-line-gestion-brown/feed-bag.png', isImage: true, color: 'text-rose-600', bg: 'bg-rose-50/50' },
+        { label: 'Consumo H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: './feed-bag.png', isImage: true, color: 'text-orange-600', bg: 'bg-orange-50/50' },
+        { label: 'Consumo M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: './feed-bag.png', isImage: true, color: 'text-rose-600', bg: 'bg-rose-50/50' },
         { label: 'Consumo', value: `≈ ${data.waterConsumption.toFixed(0)}`, unit: 'ml', icon: 'water_drop', color: 'text-cyan-600', bg: 'bg-cyan-50/50' },
     ];
 
