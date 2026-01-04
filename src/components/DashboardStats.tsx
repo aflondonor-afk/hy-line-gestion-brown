@@ -24,8 +24,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     ];
 
     const consumptionStats = [
-        { label: 'Consumo H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: './feed-pellets.png', isImage: true, color: 'text-orange-600', bg: 'bg-orange-50/50' },
-        { label: 'Consumo M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: './feed-pellets.png', isImage: true, color: 'text-rose-600', bg: 'bg-rose-50/50' },
+        { label: 'Consumo H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: './pellets.png', isImage: true, color: 'text-orange-600', bg: 'bg-orange-50/50' },
+        { label: 'Consumo M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: './pellets.png', isImage: true, color: 'text-rose-600', bg: 'bg-rose-50/50' },
         { label: 'Consumo', value: `≈ ${data.waterConsumption.toFixed(0)}`, unit: 'ml', icon: 'water_drop', color: 'text-cyan-600', bg: 'bg-cyan-50/50' },
     ];
 
@@ -42,7 +42,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
                 {weightStats.map((stat, idx) => (
                     <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
-                        <div className={`${stat.bg} ${stat.color} w-8 h-8 rounded flex items-center justify-center mb-1`}>
+                        <div className={`w-8 h-8 rounded flex items-center justify-center mb-1 ${stat.color}`}>
                             {renderIcon(stat)}
                         </div>
                         <div>
@@ -77,7 +77,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
                 {consumptionStats.map((stat, idx) => (
                     <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
-                        <div className={`${stat.bg} ${stat.color} w-8 h-8 rounded flex items-center justify-center mb-1`}>
+                        <div className={`w-8 h-8 rounded flex items-center justify-center mb-1 ${stat.color}`}>
                             {renderIcon(stat)}
                         </div>
                         <div>
