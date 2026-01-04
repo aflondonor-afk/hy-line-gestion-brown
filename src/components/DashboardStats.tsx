@@ -47,7 +47,9 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
         if (week === 1) return "Sem 1.png";
         if (week === 2) return "Sem 2.png";
         if (week === 3) return "Sem 3.png";
-        if (week >= 4 && week <= 6) return "Sem 4-6.png";
+        if (week === 4) return "Sem 4.png";
+        if (week === 5) return "Sem 5.png";
+        if (week === 6) return "Sem 6.png";
         return null; // For week 7 onwards
     };
 
