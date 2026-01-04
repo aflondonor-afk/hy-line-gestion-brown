@@ -43,6 +43,16 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
         },
     ];
 
+    const getChickImage = (week: number) => {
+        if (week === 1) return "Sem 1.png";
+        if (week === 2) return "Sem 2.png";
+        if (week === 3) return "Sem 3.png";
+        if (week >= 4 && week <= 6) return "Sem 4-6.png";
+        return null; // For week 7 onwards
+    };
+
+    const chickImage = getChickImage(data.week);
+
     return (
         <div className="flex gap-4 items-stretch min-h-[380px]">
             {/* Metrics Column - Left */}
@@ -65,14 +75,22 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
 
             {/* Chick Image - Right Column */}
             <div className="flex-1 bg-white rounded-[32px] p-6 shadow-soft border border-gray-50 flex items-center justify-center overflow-hidden relative group">
-                <img
-                    src="semana 1-2.png" // Updated to the new high-quality image
-                    alt="Pollito"
-                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
-                />
+                {chickImage ? (
+                    <img
+                        src={chickImage}
+                        alt={`Pollito Semana ${data.week}`}
+                        className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
+                    />
+                ) : (
+                    <div className="flex flex-col items-center justify-center text-gray-300 text-center p-4">
+                        <span className="material-icons-round text-5xl mb-2">add_a_photo</span>
+                        <p className="text-xs font-bold uppercase tracking-widest">Sin foto</p>
+                        <p className="text-[10px] mt-1 opacity-60">Semanas 7+</p>
+                    </div>
+                )}
 
                 {/* Visual Accent */}
-                <div className="absolute top-4 right-4 w-12 h-12 bg-secondary/10 rounded-full blur-2xl"></div>
+                {chickImage && <div className="absolute top-4 right-4 w-12 h-12 bg-secondary/10 rounded-full blur-2xl"></div>}
             </div>
         </div>
     );
