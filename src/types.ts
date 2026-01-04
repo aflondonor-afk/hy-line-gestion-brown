@@ -5,7 +5,8 @@ export interface WeekData {
   weightH: number;
   weightM: number;
   waterConsumption: number;
-  feedConsumption: number;
+  feedConsumptionH: number;
+  feedConsumptionM: number;
   uniformity: number;
   eggMass: number;
 }

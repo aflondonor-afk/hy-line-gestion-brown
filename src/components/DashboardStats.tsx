@@ -6,43 +6,6 @@ interface DashboardStatsProps {
 }
 
 const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
-    const isCria = data.phase === 'Cría';
-
-    const stats = [
-        {
-            label: 'PESO CORP. H',
-            value: data.weightH,
-            unit: 'g',
-            icon: 'inventory_2',
-            iconBg: 'bg-blue-50',
-            iconColor: 'text-blue-600',
-        },
-        {
-            label: 'PESO CORP. M',
-            value: data.weightM,
-            unit: 'g',
-            icon: 'scale',
-            iconBg: 'bg-emerald-50',
-            iconColor: 'text-emerald-600',
-        },
-        {
-            label: 'CONS. AGUA',
-            value: `≈ ${data.waterConsumption.toFixed(0)}`,
-            unit: 'ml',
-            icon: 'water_drop',
-            iconBg: 'bg-cyan-50',
-            iconColor: 'text-cyan-600',
-        },
-        {
-            label: 'CONS. ALIMENTO',
-            value: data.feedConsumption.toFixed(1),
-            unit: 'g',
-            icon: 'restaurant',
-            iconBg: 'bg-orange-50',
-            iconColor: 'text-orange-600',
-        },
-    ];
-
     const getChickImage = (week: number) => {
         if (week === 0) return "Sem 1.png";
         if (week === 1) return "Sem 2.png";
@@ -50,49 +13,77 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
         if (week === 3) return "Sem 4.png";
         if (week === 4) return "Sem 5.png";
         if (week === 5) return "Sem 6.png";
-        return null; // For week 6+ onwards
+        return null;
     };
 
     const chickImage = getChickImage(data.week);
 
+    const weightStats = [
+        { label: 'PESO CORP. H', value: data.weightH, unit: 'g', icon: 'inventory_2', color: 'text-blue-600', bg: 'bg-blue-50/50' },
+        { label: 'PESO CORP. M', value: data.weightM, unit: 'g', icon: 'scale', color: 'text-emerald-600', bg: 'bg-emerald-50/50' },
+    ];
+
+    const consumptionStats = [
+        { label: 'CONS. ALIM. H', value: data.feedConsumptionH.toFixed(1), unit: 'g', icon: 'restaurant', color: 'text-orange-600', bg: 'bg-orange-50/50' },
+        { label: 'CONS. ALIM. M', value: data.feedConsumptionM.toFixed(1), unit: 'g', icon: 'restaurant', color: 'text-rose-600', bg: 'bg-rose-50/50' },
+        { label: 'CONS. AGUA', value: `≈ ${data.waterConsumption.toFixed(0)}`, unit: 'ml', icon: 'water_drop', color: 'text-cyan-600', bg: 'bg-cyan-50/50' },
+    ];
+
     return (
-        <div className="flex gap-4 items-stretch min-h-[380px]">
-            {/* Metrics Column - Left */}
-            <div className="flex flex-col gap-2.5 w-[110px] flex-shrink-0">
-                {stats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-3 rounded-[24px] shadow-soft border border-gray-50 flex flex-col justify-center flex-1 hover:scale-105 transition-transform">
-                        <div className={`${stat.iconBg} ${stat.iconColor} w-7 h-7 rounded-lg flex items-center justify-center mb-1.5`}>
-                            <span className="material-icons-round text-base">{stat.icon}</span>
+        <div className="flex gap-2 items-stretch min-h-[380px]">
+            {/* Weights Column - Left */}
+            <div className="flex flex-col gap-2.5 w-[82px] flex-shrink-0">
+                {weightStats.map((stat, idx) => (
+                    <div key={idx} className="bg-white p-2.5 rounded-[22px] shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
+                        <div className={`${stat.bg} ${stat.color} w-6 h-6 rounded-lg flex items-center justify-center mb-1.5`}>
+                            <span className="material-icons-round text-[14px]">{stat.icon}</span>
                         </div>
                         <div>
-                            <p className="text-[7.5px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <p className="text-[6.5px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
                             <div className="flex items-baseline gap-0.5">
-                                <p className="text-sm font-black text-gray-800">{stat.value}</p>
-                                <p className="text-[8px] font-bold text-gray-300">{stat.unit}</p>
+                                <p className="text-xs font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[7px] font-bold text-gray-300">{stat.unit}</p>
                             </div>
                         </div>
                     </div>
                 ))}
+                {/* Spacer to balance the 2 vs 3 cards */}
+                <div className="flex-[0.5]"></div>
             </div>
 
-            {/* Chick Image - Right Column (No container, floating effect) */}
+            {/* Chick Image - Center */}
             <div className="flex-1 flex items-center justify-center overflow-hidden relative group">
                 {chickImage ? (
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-700 drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)]"
+                        className="w-full h-full object-contain transform scale-125 transition-transform duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.12)]"
                     />
                 ) : (
                     <div className="flex-1 bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
                         <span className="material-icons-round text-5xl mb-2">add_a_photo</span>
                         <p className="text-xs font-bold uppercase tracking-widest">Sin foto</p>
-                        <p className="text-[10px] mt-1 opacity-60">Semanas 7+</p>
                     </div>
                 )}
+                <div className="absolute inset-0 bg-gradient-to-tr from-secondary/5 to-transparent rounded-full blur-3xl -z-10"></div>
+            </div>
 
-                {/* Visual Accent - Subtle glow behind the animal */}
-                {chickImage && <div className="absolute inset-0 bg-gradient-to-tr from-secondary/5 to-transparent rounded-full blur-3xl -z-10"></div>}
+            {/* Consumptions Column - Right */}
+            <div className="flex flex-col gap-2.5 w-[82px] flex-shrink-0">
+                {consumptionStats.map((stat, idx) => (
+                    <div key={idx} className="bg-white p-2.5 rounded-[22px] shadow-soft border border-gray-50 flex flex-col justify-center flex-1 transition-transform active:scale-95">
+                        <div className={`${stat.bg} ${stat.color} w-6 h-6 rounded-lg flex items-center justify-center mb-1.5`}>
+                            <span className="material-icons-round text-[14px]">{stat.icon}</span>
+                        </div>
+                        <div>
+                            <p className="text-[6.5px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <div className="flex items-baseline gap-0.5">
+                                <p className="text-xs font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[7px] font-bold text-gray-300">{stat.unit}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

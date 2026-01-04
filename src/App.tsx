@@ -84,11 +84,13 @@ const generateWeekData = (): WeekData[] => {
     }
 
     // Get real or mock consumption
-    let water, feed;
+    let water, feedH, feedM;
     if (realConsumption[i]) {
-      feed = realConsumption[i].h; // Using female consumption as primary for feed
+      feedH = realConsumption[i].h;
+      feedM = realConsumption[i].m;
     } else {
-      feed = i > 18 ? 112 + (Math.random() * 5) : 10 + (i * 5);
+      feedH = i > 18 ? 112 + (Math.random() * 5) : 10 + (i * 5);
+      feedM = i > 18 ? 115 + (Math.random() * 5) : 12 + (i * 5.2);
     }
 
     if (realWaterConsumption[i]) {
@@ -104,7 +106,8 @@ const generateWeekData = (): WeekData[] => {
       weightH,
       weightM,
       waterConsumption: water,
-      feedConsumption: feed,
+      feedConsumptionH: feedH,
+      feedConsumptionM: feedM,
       uniformity: 98 - (Math.random() * 5),
       eggMass: i >= 20 ? 62 + (Math.random() * 2) : 0,
     });
