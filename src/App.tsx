@@ -154,8 +154,7 @@ const App: React.FC = () => {
         />
 
         <div className="mt-8 mb-4 flex items-baseline justify-between px-1">
-          <h2 className="text-[22px] font-black text-gray-800">Métricas Clave</h2>
-          <span className="text-[10px] font-bold text-gray-300 uppercase letter-spacing-1">Hoy 08:00 AM</span>
+          <h2 className="text-[22px] font-black text-gray-800">Métricas</h2>
         </div>
 
         <DashboardStats data={currentData} />
