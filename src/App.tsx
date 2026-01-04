@@ -7,31 +7,95 @@ import BottomNav from './components/BottomNav';
 import { WeekData, FocusItem } from './types';
 
 // --- MOCK DATA GENERATORS ---
+// --- REAL DATA TABLES (from CSVs) ---
+const realWeights: Record<number, { h: number, m: number }> = {
+  0: { h: 40, m: 38 },
+  1: { h: 70, m: 77 },
+  2: { h: 124, m: 144 },
+  3: { h: 201, m: 237 },
+  4: { h: 283, m: 340 },
+  5: { h: 371, m: 464 },
+  6: { h: 469, m: 608 },
+  7: { h: 577, m: 752 },
+  8: { h: 680, m: 927 },
+  9: { h: 783, m: 1092 },
+  10: { h: 881, m: 1257 },
+  11: { h: 979, m: 1411 },
+  12: { h: 1066, m: 1576 },
+  13: { h: 1154, m: 1741 },
+  14: { h: 1226, m: 1885 },
+  15: { h: 1298, m: 2019 },
+  16: { h: 1365, m: 2081 },
+  17: { h: 1447, m: 2153 },
+  18: { h: 1530, m: 2260 },
+  19: { h: 1600, m: 2300 },
+  20: { h: 1670, m: 2350 }
+};
+
+const realConsumption: Record<number, { h: number, m: number }> = {
+  0: { h: 10, m: 10 },
+  1: { h: 14, m: 15 },
+  2: { h: 21, m: 22 },
+  3: { h: 27, m: 28 },
+  4: { h: 30, m: 31 },
+  5: { h: 34, m: 35 },
+  6: { h: 36, m: 39 },
+  7: { h: 40, m: 43 },
+  8: { h: 45, m: 48 },
+  9: { h: 50, m: 53 },
+  10: { h: 55, m: 58 },
+  11: { h: 60, m: 63 },
+  12: { h: 65, m: 68 },
+  13: { h: 69, m: 72 },
+  14: { h: 72, m: 75 },
+  15: { h: 74, m: 77 },
+  16: { h: 76, m: 79 },
+  17: { h: 79, m: 81 },
+  18: { h: 82, m: 84 },
+  19: { h: 87, m: 89 },
+  20: { h: 93, m: 95 },
+  21: { h: 104, m: 106 }
+};
+
 const generateWeekData = (): WeekData[] => {
   const data: WeekData[] = [];
   for (let i = 0; i <= 75; i++) {
     let phase: 'Cría' | 'Levante' | 'Producción' = 'Cría';
-    let targetWeight = 0;
 
-    if (i <= 4) {
-      phase = 'Cría';
-      targetWeight = 40 + (i * 70);
-    } else if (i <= 19) {
-      phase = 'Levante';
-      targetWeight = 320 + ((i - 4) * 85);
+    // Phase logic
+    if (i <= 4) phase = 'Cría';
+    else if (i <= 19) phase = 'Levante';
+    else phase = 'Producción';
+
+    // Get real or mock weights
+    let weightH, weightM;
+    if (realWeights[i]) {
+      weightH = realWeights[i].h;
+      weightM = realWeights[i].m;
     } else {
-      phase = 'Producción';
-      targetWeight = 1600 + ((i - 19) * 5);
+      const targetWeight = 1670 + ((i - 20) * 5); // Simple linear mock for 20+
+      weightH = Math.floor(targetWeight + (Math.random() * 50 - 25));
+      weightM = Math.floor(targetWeight * 0.95 + (Math.random() * 50 - 25));
+    }
+
+    // Get real or mock consumption
+    let water, feed;
+    if (realConsumption[i]) {
+      feed = realConsumption[i].h; // Using female consumption as primary for feed
+      water = realConsumption[i].m * 1.8; // Simple water estimation
+    } else {
+      water = i * 15 + (Math.random() * 10);
+      feed = i > 18 ? 112 + (Math.random() * 5) : 10 + (i * 5);
     }
 
     data.push({
       week: i,
       phase,
       status: Math.random() > 0.8 ? 'Revisar' : 'Óptimo',
-      weightH: Math.floor(targetWeight + (Math.random() * 50 - 25)),
-      weightM: Math.floor(targetWeight * 0.95 + (Math.random() * 50 - 25)),
-      waterConsumption: i * 15 + (Math.random() * 10),
-      feedConsumption: i > 18 ? 112 + (Math.random() * 5) : 10 + (i * 5),
+      weightH,
+      weightM,
+      waterConsumption: water,
+      feedConsumption: feed,
       uniformity: 98 - (Math.random() * 5),
       eggMass: i >= 20 ? 62 + (Math.random() * 2) : 0,
     });
