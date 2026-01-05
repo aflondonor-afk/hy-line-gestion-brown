@@ -117,12 +117,11 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                 </div>
 
                 {/* Agua - Keep as separate clean card below */}
-                <div className="bg-white p-1.5 rounded-lg shadow-soft border border-gray-50 flex flex-col items-center justify-center transition-transform active:scale-95">
-                    <div className="rounded flex items-center justify-center mb-1 text-cyan-600">
+                <div className="bg-white p-1 rounded-lg shadow-soft border border-gray-50 flex flex-col items-center justify-center transition-transform active:scale-95">
+                    <div className="rounded flex items-center justify-center mb-0.5 text-cyan-600">
                         <span className="material-icons-round text-[20px]">water_drop</span>
                     </div>
                     <div className="text-center">
-                        <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-1">Consumo Agua</p>
                         <div className="flex items-baseline justify-center gap-0.5">
                             <p className="text-[14px] font-black text-gray-800">≈ {data.waterConsumption.toFixed(0)}</p>
                             <p className="text-[10px] font-bold text-gray-300">ml</p>
