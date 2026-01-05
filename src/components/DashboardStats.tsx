@@ -39,7 +39,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     return (
         <div className="flex gap-2 items-center justify-center min-h-[300px]">
             {/* Peso Column - Left (Unified Card) */}
-            <div className="w-[105px] flex-shrink-0">
+            <div className="w-[85px] flex-shrink-0">
                 <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
                     <div className="bg-white py-1.5 border-b border-gray-50 text-center">
                         <span className="text-[11px] font-black text-primary uppercase tracking-widest">Peso</span>
@@ -77,7 +77,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform scale-150 transition-transform duration-100 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
+                        className="w-full h-full object-contain transform scale-125 transition-transform duration-100 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
                     />
                 ) : (
                     <div className="w-full aspect-square bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
@@ -117,13 +117,13 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                 </div>
 
                 {/* Agua - Keep as separate clean card below */}
-                <div className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
-                    <div className="w-8 h-8 rounded flex items-center justify-center mb-1 text-cyan-600">
+                <div className="bg-white p-1.5 rounded-lg shadow-soft border border-gray-50 flex flex-col items-center justify-center transition-transform active:scale-95">
+                    <div className="rounded flex items-center justify-center mb-1 text-cyan-600">
                         <span className="material-icons-round text-[20px]">water_drop</span>
                     </div>
-                    <div>
-                        <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">Consumo Agua</p>
-                        <div className="flex items-baseline gap-0.5">
+                    <div className="text-center">
+                        <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-1">Consumo Agua</p>
+                        <div className="flex items-baseline justify-center gap-0.5">
                             <p className="text-[14px] font-black text-gray-800">≈ {data.waterConsumption.toFixed(0)}</p>
                             <p className="text-[10px] font-bold text-gray-300">ml</p>
                         </div>
