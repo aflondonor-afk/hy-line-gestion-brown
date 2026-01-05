@@ -1,22 +1,24 @@
 export interface WeekData {
   week: number;
   phase: 'Cría' | 'Levante' | 'Producción';
-  status: string;
+  status: 'Óptimo' | 'Revisar';
   weightH: number;
   weightM: number;
+  expectedWeightH?: number;
+  expectedWeightM?: number;
   waterConsumption: number;
   feedConsumptionH: number;
   feedConsumptionM: number;
+  expectedFeedH?: number;
+  expectedFeedM?: number;
   uniformity: number;
   eggMass: number;
 }
 
-export type FocusTab = 'Manejo' | 'Iluminación' | 'Nutrición';
-
 export interface FocusItem {
   id: string;
-  category: FocusTab;
+  category: string;
   title: string;
   description: string;
-  icon: string; // Material Icon name
+  icon: string;
 }

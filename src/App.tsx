@@ -105,9 +105,13 @@ const generateWeekData = (): WeekData[] => {
       status: Math.random() > 0.8 ? 'Revisar' : 'Óptimo',
       weightH,
       weightM,
+      expectedWeightH: realWeights[i]?.h,
+      expectedWeightM: realWeights[i]?.m,
       waterConsumption: water,
       feedConsumptionH: feedH,
       feedConsumptionM: feedM,
+      expectedFeedH: realConsumption[i]?.h,
+      expectedFeedM: realConsumption[i]?.m,
       uniformity: 98 - (Math.random() * 5),
       eggMass: i >= 20 ? 62 + (Math.random() * 2) : 0,
     });
