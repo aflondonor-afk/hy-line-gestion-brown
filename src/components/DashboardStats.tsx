@@ -51,8 +51,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                                 <span className="text-[8px] font-bold text-gray-500 uppercase">Hembra</span>
                             </div>
                             <div className="flex items-baseline justify-center gap-0.5">
-                                <span className="text-[18px] font-black text-primary leading-none">{data.weightH}</span>
-                                <span className="text-[10px] font-bold text-primary opacity-40">g</span>
+                                <span className="text-[18px] font-black text-gray-900 leading-none">{data.weightH}</span>
+                                <span className="text-[10px] font-bold text-gray-400">g</span>
                             </div>
                         </div>
                         {/* Macho Row */}
@@ -61,8 +61,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                                 <span className="text-[8px] font-bold text-gray-500 uppercase">Macho</span>
                             </div>
                             <div className="flex items-baseline justify-center gap-0.5">
-                                <span className="text-[18px] font-black text-primary leading-none">{data.weightM}</span>
-                                <span className="text-[10px] font-bold text-primary opacity-40">g</span>
+                                <span className="text-[18px] font-black text-gray-900 leading-none">{data.weightM}</span>
+                                <span className="text-[10px] font-bold text-gray-400">g</span>
                             </div>
                         </div>
                     </div>
@@ -86,12 +86,12 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             </div>
 
             {/* Consumptions Column - Right (Unified Card) */}
-            <div className="flex flex-col gap-2 w-[105px] flex-shrink-0">
+            <div className="flex flex-col gap-2 w-[120px] flex-shrink-0">
                 <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
                     {/* Header with Pellet Icon */}
                     <div className="bg-white py-1.5 border-b border-gray-50 flex items-center justify-center gap-1.5">
                         <span className="text-[11px] font-black text-gray-800 uppercase tracking-widest">Consumo</span>
-                        <img src="./pellets.png" className="w-6 h-6 object-contain" alt="" />
+                        <img src="./pellets.png" className="w-8 h-8 object-contain" alt="" />
                     </div>
 
                     <div className="flex flex-col">
@@ -99,16 +99,16 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                         <div className="p-2 border-b border-gray-50 text-center">
                             <span className="text-[8px] font-bold text-gray-400 uppercase block mb-0.5">Hembra</span>
                             <div className="flex items-baseline justify-center gap-0.5">
-                                <span className="text-[18px] font-black text-orange-600 leading-none">{data.feedConsumptionH.toFixed(0)}</span>
-                                <span className="text-[10px] font-bold text-orange-600 opacity-40">g</span>
+                                <span className="text-[18px] font-black text-gray-900 leading-none">{data.feedConsumptionH.toFixed(0)}</span>
+                                <span className="text-[10px] font-bold text-gray-400">g</span>
                             </div>
                         </div>
                         {/* Macho Alimento */}
                         <div className="p-2 text-center">
                             <span className="text-[8px] font-bold text-gray-400 uppercase block mb-0.5">Macho</span>
                             <div className="flex items-baseline justify-center gap-0.5">
-                                <span className="text-[18px] font-black text-rose-600 leading-none">{data.feedConsumptionM.toFixed(0)}</span>
-                                <span className="text-[10px] font-bold text-rose-600 opacity-40">g</span>
+                                <span className="text-[18px] font-black text-gray-900 leading-none">{data.feedConsumptionM.toFixed(0)}</span>
+                                <span className="text-[10px] font-bold text-gray-400">g</span>
                             </div>
                         </div>
                     </div>
@@ -116,13 +116,13 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
 
                 {/* Agua - Keep as separate clean card below */}
                 <div className="bg-white p-1 rounded-lg shadow-soft border border-gray-50 flex flex-col items-center justify-center transition-transform active:scale-95">
-                    <div className="rounded flex items-center justify-center mb-0.5 text-cyan-600">
+                    <div className="rounded flex items-center justify-center mb-0.5 text-gray-400">
                         <span className="material-icons-round text-[20px]">water_drop</span>
                     </div>
                     <div className="text-center">
                         <div className="flex items-baseline justify-center gap-0.5">
-                            <p className="text-[14px] font-black text-gray-800">≈ {data.waterConsumption.toFixed(0)}</p>
-                            <p className="text-[10px] font-bold text-gray-300">ml</p>
+                            <p className="text-[14px] font-black text-gray-900">≈ {data.waterConsumption.toFixed(0)}</p>
+                            <p className="text-[10px] font-bold text-gray-400">ml</p>
                         </div>
                     </div>
                 </div>
