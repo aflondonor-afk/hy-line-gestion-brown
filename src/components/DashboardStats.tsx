@@ -97,7 +97,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                     <div className="flex flex-col">
                         {/* Hembra Alimento */}
                         <div className="p-2 border-b border-gray-50 text-center">
-                            <span className="text-[8px] font-bold text-gray-400 uppercase block mb-0.5">Hembra</span>
+                            <span className="text-[8px] font-bold text-gray-500 uppercase block mb-0.5">Hembra</span>
                             <div className="flex items-baseline justify-center gap-0.5">
                                 <span className="text-[18px] font-black text-gray-900 leading-none">{data.feedConsumptionH.toFixed(0)}</span>
                                 <span className="text-[10px] font-bold text-gray-400">g</span>
@@ -105,7 +105,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                         </div>
                         {/* Macho Alimento */}
                         <div className="p-2 text-center">
-                            <span className="text-[8px] font-bold text-gray-400 uppercase block mb-0.5">Macho</span>
+                            <span className="text-[8px] font-bold text-gray-500 uppercase block mb-0.5">Macho</span>
                             <div className="flex items-baseline justify-center gap-0.5">
                                 <span className="text-[18px] font-black text-gray-900 leading-none">{data.feedConsumptionM.toFixed(0)}</span>
                                 <span className="text-[10px] font-bold text-gray-400">g</span>
