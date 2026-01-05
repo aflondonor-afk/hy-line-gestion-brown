@@ -39,7 +39,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
     return (
         <div className="flex gap-2 items-center justify-center min-h-[300px]">
             {/* Peso Column - Left (Unified Card) */}
-            <div className="w-[120px] flex-shrink-0">
+            <div className="w-[105px] flex-shrink-0">
                 <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
                     <div className="bg-white py-1.5 border-b border-gray-50 text-center">
                         <span className="text-[11px] font-black text-primary uppercase tracking-widest">Peso</span>
@@ -77,7 +77,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                     <img
                         src={chickImage}
                         alt={`Pollito Semana ${data.week}`}
-                        className="w-full h-full object-contain transform scale-125 transition-transform duration-100 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
+                        className="w-full h-full object-contain transform scale-150 transition-transform duration-100 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
                     />
                 ) : (
                     <div className="w-full aspect-square bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
@@ -88,7 +88,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             </div>
 
             {/* Consumptions Column - Right (Unified Card) */}
-            <div className="flex flex-col gap-2 w-[120px] flex-shrink-0">
+            <div className="flex flex-col gap-2 w-[105px] flex-shrink-0">
                 <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
                     {/* Header with Pellet Icon */}
                     <div className="bg-white py-1.5 border-b border-gray-50 flex items-center justify-center gap-1.5">
