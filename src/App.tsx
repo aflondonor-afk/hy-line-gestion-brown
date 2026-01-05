@@ -62,6 +62,11 @@ const realWaterConsumption: Record<number, number> = {
   11: 96, 12: 104, 13: 110, 14: 117, 15: 120, 16: 122, 17: 126, 18: 130
 };
 
+const realUniformity: Record<number, number> = {
+  1: 85, 2: 86, 3: 87, 4: 88, 5: 89, 6: 90, 7: 91, 8: 92, 9: 92, 10: 92,
+  11: 91, 12: 91, 13: 90, 14: 90, 15: 89, 16: 88, 17: 87, 18: 86, 19: 85, 20: 84
+};
+
 const generateWeekData = (): WeekData[] => {
   const data: WeekData[] = [];
   for (let i = 0; i <= 75; i++) {
@@ -99,6 +104,8 @@ const generateWeekData = (): WeekData[] => {
       water = i * 15 + (Math.random() * 10);
     }
 
+    const uniformity = realUniformity[i] || (98 - (Math.random() * 5));
+
     data.push({
       week: i,
       phase,
@@ -112,7 +119,7 @@ const generateWeekData = (): WeekData[] => {
       feedConsumptionM: feedM,
       expectedFeedH: realConsumption[i]?.h,
       expectedFeedM: realConsumption[i]?.m,
-      uniformity: 98 - (Math.random() * 5),
+      uniformity: uniformity,
       eggMass: i >= 20 ? 62 + (Math.random() * 2) : 0,
     });
   }
@@ -163,9 +170,28 @@ const App: React.FC = () => {
 
         <DashboardStats data={currentData} />
 
+        {/* UNIFORMITY SECTION - ONLY UP TO WEEK 20 */}
+        {currentWeek <= 20 && (
+          <div className="mt-8 px-1">
+            <div className="bg-white p-4 rounded-2xl shadow-soft border border-gray-100 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                  <span className="material-icons-round text-[22px]">donut_large</span>
+                </div>
+                <div>
+                  <h3 className="text-sm font-black text-gray-800 uppercase tracking-tight">Uniformidad</h3>
+                  <p className="text-[10px] font-bold text-gray-400">Meta Hy-Line: >85%</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="text-[24px] font-black text-gray-900 leading-none">{currentData.uniformity.toFixed(1)}%</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="mt-10 mb-5 px-1">
           <h2 className="text-[22px] font-black text-gray-800">Enfoque Semanal</h2>
-          <p className="text-xs font-medium text-gray-400 mt-1">Tareas prioritarias para la semana {currentWeek}</p>
         </div>
         <FocusSection items={mockFocusItems} />
       </main>
