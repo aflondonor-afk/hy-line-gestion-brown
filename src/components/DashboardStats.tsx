@@ -42,7 +42,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
             <div className="w-[85px] flex-shrink-0">
                 <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
                     <div className="bg-white py-1.5 border-b border-gray-50 text-center">
-                        <span className="text-[11px] font-black text-primary uppercase tracking-widest">Peso</span>
+                        <span className="text-[11px] font-black text-gray-900 uppercase tracking-widest">Peso</span>
                     </div>
                     <div className="flex flex-col">
                         {/* Hembra Row */}
@@ -90,7 +90,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                 <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
                     {/* Header with Pellet Icon */}
                     <div className="bg-white py-1.5 border-b border-gray-50 flex items-center justify-center gap-1.5">
-                        <span className="text-[11px] font-black text-gray-800 uppercase tracking-widest">Consumo</span>
+                        <span className="text-[11px] font-black text-gray-900 uppercase tracking-widest">Consumo</span>
                         <img src="./pellets.png" className="w-8 h-8 object-contain" alt="" />
                     </div>
 
@@ -116,7 +116,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
 
                 {/* Agua - Keep as separate clean card below */}
                 <div className="bg-white p-1 rounded-lg shadow-soft border border-gray-50 flex flex-col items-center justify-center transition-transform active:scale-95">
-                    <div className="rounded flex items-center justify-center mb-0.5 text-gray-400">
+                    <div className="rounded flex items-center justify-center mb-0.5 text-cyan-500">
                         <span className="material-icons-round text-[20px]">water_drop</span>
                     </div>
                     <div className="text-center">
