@@ -38,22 +38,37 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
 
     return (
         <div className="flex gap-2 items-center justify-center min-h-[300px]">
-            {/* Weights Column - Left */}
-            <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
-                {weightStats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
-                        <div className={`w-8 h-8 rounded flex items-center justify-center mb-1 ${stat.color}`}>
-                            {renderIcon(stat)}
+            {/* Peso Column - Left (Unified Card) */}
+            <div className="w-[120px] flex-shrink-0">
+                <div className="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+                    <div className="bg-white py-1.5 border-b border-gray-50 text-center">
+                        <span className="text-[11px] font-black text-primary uppercase tracking-widest">Peso</span>
+                    </div>
+                    <div className="flex flex-col">
+                        {/* Hembra Row */}
+                        <div className="p-2 border-b border-gray-50">
+                            <div className="flex items-center justify-center gap-1 mb-0.5">
+                                <span className="text-[8px] font-bold text-gray-500 uppercase">Hembra</span>
+                                <span className="material-icons-round text-primary text-[10px]">female</span>
+                            </div>
+                            <div className="flex items-baseline justify-center gap-0.5">
+                                <span className="text-[18px] font-black text-primary leading-none">{data.weightH}</span>
+                                <span className="text-[10px] font-bold text-primary opacity-40">g</span>
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
-                            <div className="flex items-baseline gap-0.5">
-                                <p className="text-[14px] font-black text-gray-800">{stat.value}</p>
-                                <p className="text-[10px] font-bold text-gray-300">{stat.unit}</p>
+                        {/* Macho Row */}
+                        <div className="p-2">
+                            <div className="flex items-center justify-center gap-1 mb-0.5">
+                                <span className="text-[8px] font-bold text-gray-500 uppercase">Macho</span>
+                                <span className="material-icons-round text-success text-[10px]">male</span>
+                            </div>
+                            <div className="flex items-baseline justify-center gap-0.5">
+                                <span className="text-[18px] font-black text-primary leading-none">{data.weightM}</span>
+                                <span className="text-[10px] font-bold text-primary opacity-40">g</span>
                             </div>
                         </div>
                     </div>
-                ))}
+                </div>
             </div>
 
             {/* Chick Image - Center */}
