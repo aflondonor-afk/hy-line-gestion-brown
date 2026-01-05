@@ -47,9 +47,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                     <div className="flex flex-col">
                         {/* Hembra Row */}
                         <div className="p-2 border-b border-gray-50">
-                            <div className="flex items-center justify-center gap-1 mb-0.5">
+                            <div className="flex items-center justify-center mb-0.5">
                                 <span className="text-[8px] font-bold text-gray-500 uppercase">Hembra</span>
-                                <span className="material-icons-round text-primary text-[10px]">female</span>
                             </div>
                             <div className="flex items-baseline justify-center gap-0.5">
                                 <span className="text-[18px] font-black text-primary leading-none">{data.weightH}</span>
@@ -58,9 +57,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                         </div>
                         {/* Macho Row */}
                         <div className="p-2">
-                            <div className="flex items-center justify-center gap-1 mb-0.5">
+                            <div className="flex items-center justify-center mb-0.5">
                                 <span className="text-[8px] font-bold text-gray-500 uppercase">Macho</span>
-                                <span className="material-icons-round text-success text-[10px]">male</span>
                             </div>
                             <div className="flex items-baseline justify-center gap-0.5">
                                 <span className="text-[18px] font-black text-primary leading-none">{data.weightM}</span>
@@ -93,7 +91,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
                     {/* Header with Pellet Icon */}
                     <div className="bg-white py-1.5 border-b border-gray-50 flex items-center justify-center gap-1.5">
                         <span className="text-[11px] font-black text-gray-800 uppercase tracking-widest">Consumo</span>
-                        <img src="./pellets.png" className="w-4 h-4 object-contain" alt="" />
+                        <img src="./pellets.png" className="w-6 h-6 object-contain" alt="" />
                     </div>
 
                     <div className="flex flex-col">
