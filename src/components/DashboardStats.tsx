@@ -18,119 +18,76 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data }) => {
 
     const chickImage = getChickImage(data.week);
 
+    const weightStats = [
+        { label: 'Peso H', value: data.weightH, unit: 'g', icon: 'female', color: 'text-blue-600', isImage: false },
+        { label: 'Peso M', value: data.weightM, unit: 'g', icon: 'male', color: 'text-emerald-600', isImage: false },
+    ];
+
+    const consumptionStats = [
+        { label: 'Consumo H', value: data.feedConsumptionH.toFixed(0), unit: 'g', icon: './pellets.png', isImage: true, color: 'text-orange-600' },
+        { label: 'Consumo M', value: data.feedConsumptionM.toFixed(0), unit: 'g', icon: './pellets.png', isImage: true, color: 'text-rose-600' },
+        { label: 'Consumo', value: `≈ ${data.waterConsumption.toFixed(0)}`, unit: 'ml', icon: 'water_drop', isImage: false, color: 'text-cyan-600' },
+    ];
+
+    const renderIcon = (stat: any) => {
+        if (stat.isImage) {
+            return <img src={stat.icon} alt={stat.label} className="w-full h-full object-contain p-0.5" />;
+        }
+        return <span className="material-icons-round text-[20px]">{stat.icon}</span>;
+    };
+
     return (
-        <div className="relative w-full max-w-md mx-auto min-h-[380px] mt-2 px-2">
-            {/* Headers Row */}
-            <div className="flex justify-between items-start mb-8 px-4">
-                <div className="text-left w-32">
-                    <h3 className="text-[15px] font-black text-primary tracking-widest uppercase">Peso</h3>
-                    <div className="h-0.5 w-6 bg-gray-200 mt-1"></div>
-                </div>
-                <div className="text-right w-32">
-                    <h3 className="text-[15px] font-black text-primary tracking-widest uppercase">Consumo</h3>
-                    <div className="h-0.5 w-6 bg-gray-200 mt-1 ml-auto"></div>
-                </div>
+        <div className="flex gap-2 items-center justify-center min-h-[300px]">
+            {/* Weights Column - Left */}
+            <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
+                {weightStats.map((stat, idx) => (
+                    <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
+                        <div className={`w-8 h-8 rounded flex items-center justify-center mb-1 ${stat.color}`}>
+                            {renderIcon(stat)}
+                        </div>
+                        <div>
+                            <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <div className="flex items-baseline gap-0.5">
+                                <p className="text-[14px] font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[10px] font-bold text-gray-300">{stat.unit}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
 
-            {/* Main Stats Area */}
-            <div className="flex items-center justify-between relative">
-
-                {/* LEFT COLUMN: PESO */}
-                <div className="flex flex-col gap-10 w-24">
-                    {/* Hembra Peso */}
-                    <div className="text-left">
-                        <div className="flex items-center gap-1 mb-1">
-                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter">Hembra</span>
-                            <span className="material-icons-round text-primary text-[10px]">female</span>
-                        </div>
-                        <div className="flex items-baseline gap-0.5">
-                            <span className="text-[28px] font-black text-gray-800 leading-none">{data.weightH}</span>
-                            <span className="text-[12px] font-bold text-gray-400">g</span>
-                        </div>
-                        {data.expectedWeightH && (
-                            <span className="text-[12px] font-bold text-blue-400 block mt-0.5">≈ {data.expectedWeightH}g</span>
-                        )}
+            {/* Chick Image - Center */}
+            <div className="flex-1 self-center flex items-center justify-center relative group max-h-[300px]">
+                {chickImage ? (
+                    <img
+                        src={chickImage}
+                        alt={`Pollito Semana ${data.week}`}
+                        className="w-full h-full object-contain transform scale-125 transition-transform duration-100 drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)]"
+                    />
+                ) : (
+                    <div className="w-full aspect-square bg-white/50 backdrop-blur-sm rounded-[32px] border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 text-center p-4">
+                        <span className="material-icons-round text-5xl mb-2">add_a_photo</span>
                     </div>
-
-                    {/* Macho Peso */}
-                    <div className="text-left">
-                        <div className="flex items-center gap-1 mb-1">
-                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter">Macho</span>
-                            <span className="material-icons-round text-success text-[10px]">male</span>
-                        </div>
-                        <div className="flex items-baseline gap-0.5">
-                            <span className="text-[28px] font-black text-gray-800 leading-none">{data.weightM}</span>
-                            <span className="text-[12px] font-bold text-gray-400">g</span>
-                        </div>
-                        {data.expectedWeightM && (
-                            <span className="text-[12px] font-bold text-blue-400 block mt-1">≈ {data.expectedWeightM}g</span>
-                        )}
-                    </div>
-                </div>
-
-                {/* CENTER: CHICK IMAGE */}
-                <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-full max-w-[220px] pointer-events-none">
-                    <div className="relative">
-                        {chickImage && (
-                            <img
-                                src={chickImage}
-                                alt="Chick"
-                                className="w-full h-auto object-contain transform scale-125 z-10 drop-shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
-                            />
-                        )}
-                        {/* Shadow decoration inside */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-secondary/10 to-transparent rounded-full blur-3xl -z-10"></div>
-
-                        {/* Feed Icons Decoration (Floating near consumption) */}
-                        <div className="absolute right-[-20px] top-1/4">
-                            <img src="./pellets.png" className="w-8 h-8 object-contain drop-shadow-sm opacity-90" alt="" />
-                        </div>
-                        <div className="absolute right-[-20px] bottom-1/4">
-                            <img src="./pellets.png" className="w-8 h-8 object-contain drop-shadow-sm opacity-90" alt="" />
-                        </div>
-                    </div>
-                </div>
-
-                {/* RIGHT COLUMN: CONSUMO ALIMENTO */}
-                <div className="flex flex-col gap-10 w-24 text-right">
-                    {/* Hembra Consumo */}
-                    <div>
-                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter block mb-1">Hembra</span>
-                        <div className="flex items-baseline justify-end gap-0.5">
-                            <span className="text-[26px] font-black text-orange-600 leading-none">{data.feedConsumptionH.toFixed(0)}</span>
-                            <span className="text-[12px] font-bold text-orange-600 opacity-40">g</span>
-                        </div>
-                        {data.expectedFeedH && (
-                            <span className="text-[12px] font-bold text-orange-400/60 block mt-0.5">≈ {data.expectedFeedH.toFixed(0)}g</span>
-                        )}
-                    </div>
-
-                    {/* Macho Consumo */}
-                    <div>
-                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter block mb-1">Macho</span>
-                        <div className="flex items-baseline justify-end gap-0.5">
-                            <span className="text-[26px] font-black text-rose-600 leading-none">{data.feedConsumptionM.toFixed(0)}</span>
-                            <span className="text-[12px] font-bold text-rose-600 opacity-40">g</span>
-                        </div>
-                        {data.expectedFeedM && (
-                            <span className="text-[12px] font-bold text-rose-500/60 block mt-0.5">≈ {data.expectedFeedM.toFixed(0)}g</span>
-                        )}
-                    </div>
-                </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-tr from-secondary/5 to-transparent rounded-full blur-3xl -z-10"></div>
             </div>
 
-            {/* WATER BOX: LOWER RIGHT */}
-            <div className="absolute bottom-[-20px] right-2">
-                <div className="bg-cyan-50/40 border border-cyan-100/50 rounded-2xl py-2 px-5 flex flex-col items-center">
-                    <div className="flex items-center gap-1.5 mb-0.5">
-                        <span className="material-icons-round text-cyan-500 text-[14px]">water_drop</span>
-                        <span className="text-[10px] font-black text-cyan-700 uppercase">Agua</span>
+            {/* Consumptions Column - Right */}
+            <div className="flex flex-col gap-2 w-[76px] flex-shrink-0">
+                {consumptionStats.map((stat, idx) => (
+                    <div key={idx} className="bg-white p-2 rounded-lg shadow-soft border border-gray-50 flex flex-col justify-center aspect-square transition-transform active:scale-95">
+                        <div className={`w-8 h-8 rounded flex items-center justify-center mb-1 ${stat.color}`}>
+                            {renderIcon(stat)}
+                        </div>
+                        <div>
+                            <p className="text-[8px] font-black text-gray-400 tracking-tighter uppercase leading-none mb-0.5">{stat.label}</p>
+                            <div className="flex items-baseline gap-0.5">
+                                <p className="text-[14px] font-black text-gray-800">{stat.value}</p>
+                                <p className="text-[10px] font-bold text-gray-300">{stat.unit}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex items-baseline gap-0.5">
-                        <span className="text-[22px] font-black text-cyan-600 leading-none">≈ {data.waterConsumption.toFixed(0)}</span>
-                        <span className="text-[11px] font-bold text-cyan-600 opacity-50 ml-0.5">ml</span>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     );
