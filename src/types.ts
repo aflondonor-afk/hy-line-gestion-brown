@@ -13,6 +13,7 @@ export interface WeekData {
   expectedFeedM?: number;
   uniformity: number;
   eggMass: number;
+  densityInfo?: string | { days: string, value: string }[];
 }
 
 export interface FocusItem {

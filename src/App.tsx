@@ -6,7 +6,6 @@ import FocusSection from './components/FocusSection';
 import BottomNav from './components/BottomNav';
 import { WeekData, FocusItem } from './types';
 
-// --- MOCK DATA GENERATORS ---
 // --- REAL DATA TABLES (from CSVs) ---
 const realWeights: Record<number, { h: number, m: number }> = {
   0: { h: 40, m: 38 },
@@ -63,8 +62,23 @@ const realWaterConsumption: Record<number, number> = {
 };
 
 const realUniformity: Record<number, number> = {
-  1: 85, 2: 86, 3: 87, 4: 88, 5: 89, 6: 90, 7: 91, 8: 92, 9: 92, 10: 92,
-  11: 91, 12: 91, 13: 90, 14: 90, 15: 89, 16: 88, 17: 87, 18: 86, 19: 85, 20: 84
+  0: 83, 1: 83, 2: 83, 3: 83, 4: 83, 5: 83, 6: 83, 7: 90, 8: 90, 9: 90, 10: 90,
+  11: 90, 12: 95, 13: 95, 14: 95, 15: 95, 16: 95, 17: 95, 18: 98, 19: 98, 20: 98
+};
+
+// Data for Density (Week 1 matches Week 0 for initial view)
+const densityWeek1 = [
+  { days: "0-2", value: "50" },
+  { days: "3-4", value: "45" },
+  { days: "5-7", value: "35" }
+];
+
+const realDensity: Record<number, string | { days: string, value: string }[]> = {
+  0: densityWeek1,
+  1: "25",
+  2: "18",
+  3: "12",
+  4: "Toda el área"
 };
 
 const generateWeekData = (): WeekData[] => {
@@ -83,7 +97,7 @@ const generateWeekData = (): WeekData[] => {
       weightH = realWeights[i].h;
       weightM = realWeights[i].m;
     } else {
-      const targetWeight = 1670 + ((i - 20) * 5); // Simple linear mock for 20+
+      const targetWeight = 1670 + ((i - 20) * 5);
       weightH = Math.floor(targetWeight + (Math.random() * 50 - 25));
       weightM = Math.floor(targetWeight * 0.95 + (Math.random() * 50 - 25));
     }
@@ -106,6 +120,12 @@ const generateWeekData = (): WeekData[] => {
 
     const uniformity = realUniformity[i] || (98 - (Math.random() * 5));
 
+    // Density logic
+    let densityInfo = realDensity[i];
+    if (!densityInfo && i >= 4) {
+      densityInfo = "Toda el área";
+    }
+
     data.push({
       week: i,
       phase,
@@ -121,6 +141,7 @@ const generateWeekData = (): WeekData[] => {
       expectedFeedM: realConsumption[i]?.m,
       uniformity: uniformity,
       eggMass: i >= 20 ? 62 + (Math.random() * 2) : 0,
+      densityInfo
     });
   }
   return data;
@@ -170,9 +191,13 @@ const App: React.FC = () => {
 
         <DashboardStats data={currentData} />
 
+        <div className="mt-10 mb-5 px-1">
+          <h2 className="text-[22px] font-black text-gray-800">Enfoque Semanal</h2>
+        </div>
+
         {/* UNIFORMITY SECTION - ONLY UP TO WEEK 20 */}
         {currentWeek <= 20 && (
-          <div className="mt-8 px-1">
+          <div className="mb-4 px-1">
             <div className="bg-white p-4 rounded-2xl shadow-soft border border-gray-100 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
@@ -180,19 +205,56 @@ const App: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-black text-gray-800 uppercase tracking-tight">Uniformidad</h3>
-                  <p className="text-[10px] font-bold text-gray-400">Meta Hy-Line: >85%</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Hembra</p>
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-[24px] font-black text-gray-900 leading-none">{currentData.uniformity.toFixed(1)}%</span>
+                <span className="text-[24px] font-black text-gray-900 leading-none">{currentData.uniformity.toFixed(0)}%</span>
               </div>
             </div>
           </div>
         )}
 
-        <div className="mt-10 mb-5 px-1">
-          <h2 className="text-[22px] font-black text-gray-800">Enfoque Semanal</h2>
-        </div>
+        {/* DENSITY SECTION */}
+        {currentData.densityInfo && (
+          <div className="mb-6 px-1">
+            <div className="bg-white p-4 rounded-2xl shadow-soft border border-gray-100">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+                    <span className="material-icons-round text-[22px]">zoom_out_map</span>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-gray-800 uppercase tracking-tight">Densidad</h3>
+                    <p className="text-[10px] font-bold text-gray-400 lowercase tracking-wider">Aves / m²</p>
+                  </div>
+                </div>
+
+                {!Array.isArray(currentData.densityInfo) && (
+                  <div className="text-right">
+                    <span className={`font-black text-gray-900 leading-none uppercase ${currentData.densityInfo === "Toda el área" ? 'text-[18px] tracking-tight' : 'text-[24px]'
+                      }`}>
+                      {currentData.densityInfo}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Array case - Breakdown below */}
+              {Array.isArray(currentData.densityInfo) && (
+                <div className="mt-4 flex flex-col gap-1 border-t border-gray-50 pt-2">
+                  {currentData.densityInfo.map((item, idx) => (
+                    <div key={idx} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0">
+                      <span className="text-xs font-bold text-gray-500">Días {item.days}</span>
+                      <span className="text-[20px] font-black text-gray-900 leading-none">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         <FocusSection items={mockFocusItems} />
       </main>
 
