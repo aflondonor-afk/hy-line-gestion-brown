@@ -10,7 +10,7 @@ const WeekSelector: React.FC<WeekSelectorProps> = ({ currentWeek, onChange, phas
     const weeks = Array.from({ length: 76 }, (_, i) => i);
 
     return (
-        <div className="bg-white rounded-[28px] p-4 shadow-soft border border-gray-50 mb-6 max-w-sm mx-auto">
+        <div className="bg-white rounded-[28px] p-4 shadow-soft border border-gray-50 mb-2 max-w-sm mx-auto">
             <div className="flex flex-col items-center">
                 {/* Minimalist Title with Integrated Phase */}
                 <div className="flex items-baseline gap-1.5 mb-2">
