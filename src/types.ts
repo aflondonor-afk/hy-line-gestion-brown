@@ -21,6 +21,7 @@ export interface WeekData {
     temp: string | { range: string, value: string }[];
     humidity: string;
     ventilation: string | { range: string, value: string }[];
+    lighting?: { hours: string, intensity: string, darkness: string } | { range: string, hours: string, intensity: string, darkness: string }[];
   };
 }
 

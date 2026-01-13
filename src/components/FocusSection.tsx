@@ -70,32 +70,113 @@ const FocusSection: React.FC<FocusSectionProps> = ({ items, data }) => {
                 </div>
             </div>
 
-            <div className="p-4 space-y-3">
-                {/* SPECIAL GRID FOR CONFORT TAB */}
-                {activeTab === 'Confort' && data.confortMetrics && (
-                    <div className="grid grid-cols-3 gap-1 mb-4">
-                        {renderDetailedMetric('Temperatura', 'thermostat', 'blue', 'bg-blue-50/50', 'border-blue-100', 'text-blue-600', data.confortMetrics.temp)}
-                        {renderDetailedMetric('Humedad', 'water_drop', 'cyan', 'bg-cyan-50/50', 'border-cyan-100', 'text-cyan-600', data.confortMetrics.humidity)}
-                        {renderDetailedMetric('Ventilación', 'air', 'emerald', 'bg-emerald-50/50', 'border-emerald-100', 'text-emerald-600', data.confortMetrics.ventilation)}
-                    </div>
-                )}
+            <div className="p-4 space-y-4">
+                {/* CONFORT TAB STRUCTURE */}
+                {activeTab === 'Confort' && data.confortMetrics ? (
+                    <>
+                        {/* AMBIENTE SECTION */}
+                        <div className="space-y-3">
+                            <div className="flex items-center gap-2 px-1">
+                                <h3 className="text-[14px] font-black text-gray-800 uppercase tracking-wider">Ambiente</h3>
+                            </div>
 
-                {filteredItems.length > 0 ? (
-                    filteredItems.map((item) => (
-                        <div key={item.id} className="bg-gray-50/50 p-2.5 rounded-2xl flex items-center gap-3 group hover:bg-gray-50 transition-colors cursor-pointer">
-                            <div className="w-10 h-10 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-primary/60 group-hover:text-primary transition-colors">
-                                <span className="material-icons-round text-[18px]">{item.icon}</span>
+                            <div className="grid grid-cols-3 gap-1">
+                                {renderDetailedMetric('Temperatura', 'thermostat', 'blue', 'bg-blue-50/50', 'border-blue-100', 'text-blue-600', data.confortMetrics.temp)}
+                                {renderDetailedMetric('Humedad', 'water_drop', 'cyan', 'bg-cyan-50/50', 'border-cyan-100', 'text-cyan-600', data.confortMetrics.humidity)}
+                                {renderDetailedMetric('Ventilación', 'air', 'emerald', 'bg-emerald-50/50', 'border-emerald-100', 'text-emerald-600', data.confortMetrics.ventilation)}
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <h4 className="text-[13px] font-bold text-gray-800 truncate">{item.title}</h4>
-                                <p className="text-[11px] text-gray-400 leading-tight mt-0.5">{item.description}</p>
-                            </div>
-                            <span className="material-icons-round text-gray-200 text-lg group-hover:text-primary transition-colors">chevron_right</span>
+
+                            {/* Lighting Card */}
+                            {data.confortMetrics.lighting && (
+                                <div className="bg-amber-50/40 p-2 rounded-[24px] border border-amber-100/50 flex flex-col gap-2 group">
+                                    <div className="flex items-center justify-center gap-1">
+                                        <p className="text-[10px] font-black text-gray-800 uppercase tracking-tight">Iluminación</p>
+                                        <span className="material-icons-round text-amber-500 text-[16px]">lightbulb</span>
+                                    </div>
+
+                                    {/* HEADER ROW */}
+                                    <div className="flex items-center gap-2 px-1">
+                                        {Array.isArray(data.confortMetrics.lighting) && <div className="w-14 text-[0px]">.</div>}
+                                        <div className="flex-1 flex items-center">
+                                            <p className="text-[9px] font-black text-amber-600/60 uppercase tracking-tighter w-[23%] text-center">Luz</p>
+                                            <p className="text-[9px] font-black text-amber-600/60 uppercase tracking-tighter w-[30%] text-center">Luxes</p>
+                                            <p className="text-[9px] font-black text-amber-600/60 uppercase tracking-tighter w-[47%] text-center">Periodo</p>
+                                        </div>
+                                    </div>
+
+                                    {Array.isArray(data.confortMetrics.lighting) ? (
+                                        <div className="space-y-1">
+                                            {data.confortMetrics.lighting.map((item: any, idx: number) => (
+                                                <div key={idx} className="flex items-center gap-3">
+                                                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter w-14">{item.range}</span>
+                                                    <div className="flex-1 flex items-center bg-amber-50/30 py-2 rounded-xl border border-amber-100/20">
+                                                        <p className="text-[14px] font-black text-gray-900 leading-none w-[23%] text-center">{item.hours}</p>
+                                                        <div className="w-[1px] h-3 bg-amber-200/30"></div>
+                                                        <p className="text-[14px] font-black text-gray-900 leading-none w-[30%] text-center">{item.intensity}</p>
+                                                        <div className="w-[1px] h-3 bg-amber-200/30"></div>
+                                                        <p className="text-[14px] font-black text-gray-900 leading-none w-[47%] text-center">{item.darkness}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex-1 flex items-center bg-amber-50/30 py-0 rounded-xl border border-amber-100/20">
+                                                <p className="text-[19px] font-black text-gray-900 leading-none w-[23%] text-center tracking-tight">{data.confortMetrics.lighting.hours}</p>
+                                                <div className="w-[1px] h-6 bg-amber-200/30"></div>
+                                                <p className="text-[19px] font-black text-gray-900 leading-none w-[30%] text-center tracking-tight">{data.confortMetrics.lighting.intensity}</p>
+                                                <div className="w-[1px] h-6 bg-amber-200/30"></div>
+                                                <p className="text-[19px] font-black text-gray-900 leading-none w-[47%] text-center tracking-tight">{data.confortMetrics.lighting.darkness}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
-                    ))
+
+                        {/* ESPACIO SECTION */}
+                        <div className="space-y-3 pt-2">
+                            <div className="flex items-center gap-2 px-1">
+                                <h3 className="text-[14px] font-black text-gray-800 uppercase tracking-wider">Espacio</h3>
+                            </div>
+
+                            <div className="space-y-2">
+                                {filteredItems.map((item) => (
+                                    <div key={item.id} className="bg-gray-50/50 p-2.5 rounded-2xl flex items-center gap-3 group hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-100">
+                                        <div className="w-10 h-10 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-primary/60 group-hover:text-primary transition-colors">
+                                            <span className="material-icons-round text-[18px]">{item.icon}</span>
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="text-[13px] font-bold text-gray-800 truncate">{item.title}</h4>
+                                            <p className="text-[11px] text-gray-400 leading-tight mt-0.5">{item.description}</p>
+                                        </div>
+                                        <span className="material-icons-round text-gray-200 text-lg group-hover:text-primary transition-colors">chevron_right</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </>
                 ) : (
-                    <div className="py-10 text-center text-gray-400 text-xs font-bold uppercase tracking-widest">
-                        Sin tareas pendientes
+                    /* INTERVENCIONES TAB OR NO DATA */
+                    <div className="space-y-2">
+                        {filteredItems.length > 0 ? (
+                            filteredItems.map((item) => (
+                                <div key={item.id} className="bg-gray-50/50 p-2.5 rounded-2xl flex items-center gap-3 group hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-100">
+                                    <div className="w-10 h-10 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-primary/60 group-hover:text-primary transition-colors">
+                                        <span className="material-icons-round text-[18px]">{item.icon}</span>
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <h4 className="text-[13px] font-bold text-gray-800 truncate">{item.title}</h4>
+                                        <p className="text-[11px] text-gray-400 leading-tight mt-0.5">{item.description}</p>
+                                    </div>
+                                    <span className="material-icons-round text-gray-200 text-lg group-hover:text-primary transition-colors">chevron_right</span>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="py-10 text-center text-gray-400 text-xs font-bold uppercase tracking-widest">
+                                Sin tareas pendientes
+                            </div>
+                        )}
                     </div>
                 )}
 

@@ -81,8 +81,11 @@ const generateWeekData = (): WeekData[] => {
 
     // Confort Metrics based on User logic (Percentage of ON time)
     let temp: string | { range: string, value: string }[] = "24-26°C";
-    let humidity = "50-60%";
+    let humidity = "Ambiente";
     let ventilation: string | { range: string, value: string }[] = "72.2%";
+
+    // Real Lighting Data from CSV
+    let lighting: any = { hours: "12h", intensity: "10-15 lux", darkness: "6 pm – 6 am" };
 
     if (i === 0) {
       temp = [
@@ -93,28 +96,40 @@ const generateWeekData = (): WeekData[] => {
         { range: "0-2 días", value: "44.4%" },
         { range: "3-7 días", value: "50.0%" }
       ];
-      humidity = "60-70%";
+      humidity = "55-65%"; // According to Humedad.csv (0-7 días)
+      lighting = [
+        { range: "0-3 días", hours: "22h", intensity: "30-50 lux", darkness: "10 pm – 0 am" },
+        { range: "4-7 días", hours: "21h", intensity: "30-50 lux", darkness: "10 pm – 1 am" }
+      ];
     }
     else if (i === 1) {
-      temp = "30-32°C";
-      humidity = "55-65%";
-      ventilation = "50.0%";
+      temp = "30-32°C"; ventilation = "50.0%";
+      lighting = { hours: "20h", intensity: "25 lux", darkness: "10 pm – 2 am" };
     }
     else if (i === 2) {
-      temp = "28-30°C";
-      humidity = "50-60%";
-      ventilation = "61.1%";
+      temp = "28-30°C"; ventilation = "61.1%";
+      lighting = { hours: "19h", intensity: "10-15 lux", darkness: "9 pm – 2 am" };
     }
     else if (i === 3) {
-      temp = "26-28°C";
-      humidity = "50-60%";
-      ventilation = "61.1%";
+      temp = "26-28°C"; ventilation = "61.1%";
+      lighting = { hours: "18.5h", intensity: "10-15 lux", darkness: "9 pm – 2:30 am" };
     }
-    else if (i === 4) {
-      temp = "24-26°C";
-      humidity = "50-60%";
-      ventilation = "72.2%";
+    else if (i === 4 || i === 5) {
+      temp = "24-26°C"; ventilation = "72.2%";
+      lighting = { hours: "18h", intensity: "10-15 lux", darkness: "9 pm – 3 am" };
     }
+    else if (i === 6) { lighting = { hours: "17.5h", intensity: "10-15 lux", darkness: "9 pm – 3:30 am" }; }
+    else if (i === 7) { lighting = { hours: "17h", intensity: "10-15 lux", darkness: "9 pm – 4 am" }; }
+    else if (i === 8) { lighting = { hours: "16.5h", intensity: "10-15 lux", darkness: "9 pm – 4:30 am" }; }
+    else if (i === 9) { lighting = { hours: "16h", intensity: "10-15 lux", darkness: "9 pm – 5 am" }; }
+    else if (i === 10) { lighting = { hours: "15.5h", intensity: "10-15 lux", darkness: "9 pm – 5:30 am" }; }
+    else if (i === 11) { lighting = { hours: "15h", intensity: "10-15 lux", darkness: "9 pm – 6 am" }; }
+    else if (i === 12) { lighting = { hours: "14.5h", intensity: "10-15 lux", darkness: "8:30 pm – 6 am" }; }
+    else if (i === 13) { lighting = { hours: "14h", intensity: "10-15 lux", darkness: "8 pm – 6 am" }; }
+    else if (i === 14) { lighting = { hours: "13.5h", intensity: "10-15 lux", darkness: "7:30 pm – 6 am" }; }
+    else if (i === 15) { lighting = { hours: "13h", intensity: "10-15 lux", darkness: "7 pm – 6 am" }; }
+    else if (i === 16) { lighting = { hours: "12.5h", intensity: "10-15 lux", darkness: "6:30 pm – 6 am" }; }
+    else { lighting = { hours: "12h", intensity: "10-15 lux", darkness: "6 pm – 6 am" }; }
 
     data.push({
       week: i,
@@ -133,7 +148,7 @@ const generateWeekData = (): WeekData[] => {
       mortality: i === 0 ? 0.8 : (i === 1 ? 0.4 : 0.05),
       mortalityGoal: i <= 2 ? "<2" : "≤0.1",
       eggMass: i >= 20 ? 62 : 0,
-      confortMetrics: { temp, humidity, ventilation }
+      confortMetrics: { temp, humidity, ventilation, lighting }
     });
   }
   return data;
