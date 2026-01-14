@@ -131,6 +131,25 @@ const generateWeekData = (): WeekData[] => {
     else if (i === 16) { lighting = { hours: "12.5h", intensity: "10-15 lux", darkness: "6:30 pm – 6 am" }; }
     else { lighting = { hours: "12h", intensity: "10-15 lux", darkness: "6 pm – 6 am" }; }
 
+    // Space Metrics
+    let space: any = { densityH: "0", densityM: "0", feeder: "0", drinker: "0" };
+
+    if (i === 0) {
+      space = [
+        { range: "0-2 días", densityH: "50", densityM: "50", feeder: "70", drinker: "70" },
+        { range: "3-4 días", densityH: "45", densityM: "45", feeder: "70", drinker: "70" },
+        { range: "5-7 días", densityH: "35", densityM: "35", feeder: "60", drinker: "60" }
+      ];
+    } else if (i === 1) {
+      space = { densityH: "25", densityM: "20", feeder: "50", drinker: "50" };
+    } else if (i === 2) {
+      space = { densityH: "18", densityM: "15", feeder: "40", drinker: "22" };
+    } else if (i === 3) {
+      space = { densityH: "12", densityM: "10", feeder: "35", drinker: "15" };
+    } else {
+      space = { densityH: "Total", densityM: "6", feeder: "26", drinker: "10" };
+    }
+
     data.push({
       week: i,
       phase,
@@ -148,7 +167,7 @@ const generateWeekData = (): WeekData[] => {
       mortality: i === 0 ? 0.8 : (i === 1 ? 0.4 : 0.05),
       mortalityGoal: i <= 2 ? "<2" : "≤0.1",
       eggMass: i >= 20 ? 62 : 0,
-      confortMetrics: { temp, humidity, ventilation, lighting }
+      confortMetrics: { temp, humidity, ventilation, lighting, space }
     });
   }
   return data;
@@ -198,54 +217,6 @@ const App: React.FC = () => {
     }
 
     // --- CONFORT ---
-    const getDensityByWeek = (week: number) => {
-      if (week === 0) return "Días 0-2: 50 aves. Días 3-7: 35 aves.";
-      if (week === 1) return "25 aves/m².";
-      if (week === 2) return "18 aves/m².";
-      if (week === 3) return "12 aves/m².";
-      return "Toda el área disponible.";
-    };
-
-    const getFeederByWeek = (week: number) => {
-      if (week === 0) return "0-3d (Comebaby): 70 aves. 4-7d: 60 aves.";
-      if (week === 1) return "Día 8-14 (Comebaby): 50 aves.";
-      if (week === 2) return "Tolva: 40 aves por unidad.";
-      if (week === 3) return "Tolva: 35 aves por unidad.";
-      return "Tolva: 26 aves por unidad.";
-    };
-
-    const getDrinkerByWeek = (week: number) => {
-      if (week === 0) return "0-3d: 70 aves. 4-7d: 60 aves.";
-      if (week === 1) return "8-14d: 50 aves por bebedero.";
-      if (week === 2) return "15-21d: 22 aves por bebedero.";
-      if (week === 3) return "22-28d: 15 aves por bebedero.";
-      return ">29d: 10 aves por bebedero.";
-    };
-
-    items.push({
-      id: 'dens-m2',
-      category: 'Confort',
-      title: 'Densidad Aves/m²',
-      description: getDensityByWeek(currentWeek),
-      icon: 'zoom_out_map'
-    });
-
-    items.push({
-      id: 'dens-com',
-      category: 'Confort',
-      title: 'Aves / Comedero',
-      description: getFeederByWeek(currentWeek),
-      icon: 'restaurant'
-    });
-
-    items.push({
-      id: 'dens-beb',
-      category: 'Confort',
-      title: 'Aves / Bebedero',
-      description: getDrinkerByWeek(currentWeek),
-      icon: 'water_drop'
-    });
-
     return items;
   }, [currentWeek]);
 

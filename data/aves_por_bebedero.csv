@@ -1,0 +1,7 @@
+Edad_dias,Tipo_comedero,Aves_por_comedero
+0-3,Comebaby,70
+4-7,Comebaby,60
+8-14,Comebaby,50
+15-21,Tolva,40
+22-28,Tolva,35
+>29,Tolva,26

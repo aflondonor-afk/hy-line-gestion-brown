@@ -1,0 +1,19 @@
+Edad,Unidad_Tiempo,Total_Horas_Luz,Intensidad_Luxes,Horario_Oscuridad
+0-3,Días,22,30-50,10 PM – 0 AM
+4-7,Días,21,30-50,10 PM – 1 AM
+8-14,Días,20,25,10 PM – 2 AM
+15-21,Días,19,10-15,9 PM – 2 AM
+22-28,Días,18.5,10-15,9 PM – 2:30 AM
+29-35,Días,18,10-15,9 PM – 3 AM
+6,Semanas,17.5,10-15,9:00 PM – 3:30 AM
+7,Semanas,17,10-15,9:00 PM – 4:00 AM
+8,Semanas,16.5,10-15,9:00 PM – 4:30 AM
+9,Semanas,16,10-15,9:00 PM – 5:00 AM
+10,Semanas,15.5,10-15,9:00 PM – 5:30 AM
+11,Semanas,15,10-15,9:00 PM – 6:00 AM
+12,Semanas,14.5,10-15,8:30 PM – 6:00 AM
+13,Semanas,14,10-15,8:00 PM – 6:00 AM
+14,Semanas,13.5,10-15,7:30 PM – 6:00 AM
+15,Semanas,13,10-15,7:00 PM – 6:00 AM
+16,Semanas,12.5,10-15,6:30 PM – 6:00 AM
+=>17,Semanas,12,10-15,6:00 PM – 6:00 AM
